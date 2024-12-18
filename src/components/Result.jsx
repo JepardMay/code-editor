@@ -17,11 +17,9 @@ const Pre = styled.pre`
 const Result = ({ result }) => (
     <div>
         <h2>Output:</h2>
-        {result.output.split('\n').map((line, index) => (
-            <Pre key={index} status={result.status}>
-            {line}
-            </Pre>
-        ))}
+        <Pre status={result.status}>
+        {result.output}
+        </Pre>
     </div>
 );
 

@@ -5,7 +5,7 @@ const mockServer = (data) => {
       if (Math.random() < 0.3) {
         resolve({ status: 'error', error: 'SyntaxError: Unexpected token' });
       } else {
-        resolve({ status: 'success', output: 'Success! 🎉\n' + data.code});
+        resolve({ status: 'success', output: 'Success! 🎉'});
       }
     }, 1000);
   });
