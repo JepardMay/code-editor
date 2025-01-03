@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, useRef } from 'react'
 import styled from 'styled-components';
 
 import {Controlled as CodeMirror} from 'react-codemirror2';
@@ -54,10 +54,17 @@ const App = () => {
     setDisabled(false);
   };
 
+  const editor = useRef()
+  const wrapper = useRef()
+  const editorWillUnmount = () => {
+    editor.current.display.wrapper.remove()
+    wrapper.current.hydrated = false
+  }
+
   return (
     <div className="container">
       <Title>Code Editor</Title>
-      <p>Write some code in selected language and press "Run" button.</p>
+      <p>Write some code in selected language and press &quot;Run&quot; button.</p>
 
       <CodeHeader>
         <LanguageSelector value={language} onChange={(e) => setLanguage(e.target.value)} />
@@ -66,6 +73,7 @@ const App = () => {
       <CodeBody>
         <CodeMirror
           value={code}
+          ref={wrapper}
           options={{
             mode: language,
             theme: 'material',
@@ -75,7 +83,12 @@ const App = () => {
             lineWrapping: true,
             lint: true,
           }}
-          onBeforeChange={(editor, data, value) => setCode(value)}
+          onBeforeChange={(editor, data, value) => {
+            setCode(value)
+            console.log(value);
+          }}
+          editorDidMount={(e) => editor.current = e}
+          editorWillUnmount={editorWillUnmount}
         />
         <Result result={result} />
       </CodeBody>

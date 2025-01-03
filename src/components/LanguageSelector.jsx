@@ -1,4 +1,3 @@
-import React from "react";
 import styled from 'styled-components';
 
 const Select = styled.select`
@@ -22,6 +21,7 @@ const Select = styled.select`
     }
 `;
 
+import PropTypes from 'prop-types';
 const LanguageSelector = ({ value, onChange }) => (
     <Select value={value} onChange={onChange}>
         <option value="python">Python</option>
@@ -29,5 +29,10 @@ const LanguageSelector = ({ value, onChange }) => (
         <option value="javascript">JavaScript</option>
     </Select>
 );
+
+LanguageSelector.propTypes = {
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
 
 export default LanguageSelector;

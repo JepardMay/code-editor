@@ -7,6 +7,7 @@ const mockServer = (data) => {
       } else {
         resolve({ status: 'success', output: 'Success! 🎉'});
       }
+      console.log(data);
     }, 1000);
   });
 };
